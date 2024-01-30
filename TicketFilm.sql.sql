@@ -20,6 +20,7 @@ CREATE TABLE tblGhe(
     PhongId int,
     So_ghe VARCHAR(10)
 );
+-- Chỉ định khoá ngoại
 ALTER TABLE tblGhe 
 ADD CONSTRAINT FK_Phong_ID FOREIGN KEY (PhongId) REFERENCES tblPhong(PhongId);
 
@@ -29,6 +30,7 @@ CREATE TABLE tblVe(
     Ngay_chieu DATETIME,
     Trang_thai NVARCHAR(20) 
 );
+-- Chỉ định khóa ngoại
 ALTER TABLE tblve
 ADD CONSTRAINT FK_Phim_Id FOREIGN KEY (PhimId) REFERENCES tblphim(PhimId);
 ALTER TABLE tblve
@@ -40,11 +42,6 @@ INSERT INTO tblphim(Ten_phim, loai_phim, Thoi_gian) VALUES
 ('Nhiệm vụ bất khả thi','Hành động', 100),
 ('Dị nhân','Viễn tưởng', 90),
 ('Cuốn theo chiều gió','Tình cảm',120);
-INSERT INTO tblphim(Ten_phim,loai_phim,Thoi_gian) VALUES ('Anh là ai','Lãng mạn',118);
-INSERT INTO tblphim(Ten_phim,loai_phim,Thoi_gian) VALUES ('Tôi là ai','Hài',95);
-INSERT INTO tblphim(Ten_phim,loai_phim,Thoi_gian) VALUES ('Anh từ đâu đến','Lãng Mạn', 230);
-DELETE FROM tblphim;
-SELECT * FROM tblrank;
 INSERT INTO tblphong(Ten_phong,Trang_thai) VALUES
 ('Phòng chiếu 1',1),
 ('Phòng chiếu 2',1),
@@ -136,7 +133,6 @@ CREATE TABLE tblRank(
     TenPhim VARCHAR(30),
     Thoi_gian int
 );
-DROP TABLE tblrank;
 
 DELIMITER //
 CREATE TRIGGER ins_tblrank AFTER INSERT ON tblPhim
@@ -149,9 +145,6 @@ BEGIN
 END;
 //
 DELIMITER ;
-DROP PROCEDURE update_tblrank;
-DROP TRIGGER ins_tblrank;
-TRUNCATE TABLE tblrank;
 
 -- 11.	Trong bảng tblPhim :
 -- a. Thêm trường Mo_ta kiểu nvarchar(max)
